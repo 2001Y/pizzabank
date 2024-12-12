@@ -1,0 +1,395 @@
+:root {
+  --theme-color: #db4437;
+}
+
+/* フェーズに応じたテーマカラー */
+tab-system[data-phase="final"] {
+  --theme-color: #0068de;
+}
+
+/* about-usは常に青 */
+.about-us {
+  --theme-color: #0068de;
+  --theme-color-rgb: 0, 104, 222;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 1200px;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: #fff;
+}
+
+tab-system[data-phase="initial"] .tabs {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+tab-system[data-phase="initial"] label {
+  min-width: 40vw;
+  max-width: 200px;
+}
+
+tab-system[data-phase="final"] label {
+  flex: 1 1 auto;
+  max-width: 45%;
+}
+
+.feature {
+  background: rgba(var(--theme-color-rgb), 0.05);
+  padding: 24px;
+  padding-bottom: 60px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* RGB値の定義 */
+.about-us {
+  --theme-color-rgb: 0, 104, 222;
+}
+
+tab-system[data-phase="initial"] {
+  --theme-color-rgb: 219, 68, 55;
+}
+
+tab-system[data-phase="final"] {
+  --theme-color-rgb: 0, 104, 222;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  position: fixed;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", sans-serif;
+}
+
+body {
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+header {
+  background: white;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+}
+
+.header-logo {
+  height: 70px;
+  width: auto;
+}
+
+tab-system {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+tab-system input[type="radio"] {
+  display: none;
+}
+
+tab-system iframe {
+  display: none;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+tab-system iframe::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="%23666"><path d="M12 4V2A10 10 0 0 0 2 12h2a8 8 0 0 1 8-8Z"/></svg>')
+    center/contain no-repeat;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+tab-system .html-content {
+  padding: 24px;
+}
+
+tab-system .tabs {
+  display: flex;
+  /* justify-content: center; */
+  background: var(--theme-color);
+  height: 56px;
+  z-index: 1;
+}
+
+tab-system label {
+  flex: 1 1 auto;
+  max-width: 45%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 8px 4px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+tab-system svg {
+  width: 24px;
+  height: 24px;
+  fill: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+tab-system label:hover svg {
+  fill: #fff;
+}
+
+/* タブの切り替え制御 */
+tab-system input[type="radio"]:checked + iframe {
+  display: block;
+}
+
+tab-system input[type="radio"]:checked + iframe::before {
+  display: none;
+}
+
+tab-system input[type="radio"]:checked ~ .tabs label[for="comments"],
+tab-system input[type="radio"]:checked ~ .tabs label[for="questions"],
+tab-system input[type="radio"]:checked ~ .tabs label[for="survey"],
+tab-system input[type="radio"]:checked ~ .tabs label[for="about"] {
+  color: var(--theme-color);
+  background: #fff;
+  margin: 4px;
+  border-radius: 8px;
+}
+
+tab-system input[type="radio"]:checked ~ .tabs label svg {
+  fill: var(--theme-color);
+}
+
+tab-system .comments-frame {
+  --frame-margin-vertical: -35px;
+  margin-top: calc(var(--frame-margin-vertical) * 4);
+  margin-bottom: var(--frame-margin-vertical);
+}
+
+@media screen and (min-width: 935px) {
+  tab-system .comments-frame {
+    margin-bottom: 0;
+  }
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 24px 24px 32px;
+  border-radius: 16px;
+  text-align: center;
+  max-width: 85%;
+  width: 320px;
+  min-height: 260px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: modalPop 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-logo {
+  width: auto;
+  height: 80px;
+  margin-bottom: 30px;
+}
+
+.modal-icons {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  width: 100%;
+  margin: 0 0 24px;
+}
+
+.icon-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-group span {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  letter-spacing: -0.02em;
+}
+
+.modal-icon {
+  width: 40px;
+  height: 40px;
+  fill: var(--theme-color);
+}
+
+.modal-content p {
+  width: 100%;
+  margin: 0 0 28px;
+  line-height: 1.6;
+  font-size: 14px;
+  color: #666;
+}
+
+.modal-content button {
+  background: var(--theme-color);
+  color: white;
+  border: none;
+  padding: 14px 40px;
+  border-radius: 28px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  min-height: 48px;
+}
+
+.modal-content button:hover {
+  background: #c53929;
+}
+
+@keyframes modalPop {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.about-logo {
+  grid-column: 1 / -1;
+  height: 56px;
+  width: auto;
+  margin: 0 auto 16px;
+}
+
+.about-us .feature {
+  background: rgba(var(--theme-color-rgb), 0.05);
+  padding: 24px 10px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  font-size: 12px;
+  line-height: 1.5;
+  padding-bottom: 32px;
+}
+
+.about-us .feature h2 {
+  font-size: 12px;
+  margin: 8px 0;
+}
+
+.about-us .feature p {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #666;
+  margin: 0;
+}
+
+.about-us .feature.wide {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 20px;
+  gap: 16px;
+  text-align: center;
+}
+
+.feature.wide h2,
+.feature.wide p {
+  grid-column: auto;
+}
+
+.baas-image {
+  grid-column: auto;
+  grid-row: auto;
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: white;
+  padding: 16px;
+}
+
+.feature-icon {
+  width: 32px;
+  height: 32px;
+  fill: var(--theme-color);
+}
+
+.more-link {
+  position: static;
+  display: block;
+  text-align: right;
+  color: var(--theme-color);
+  font-size: 9px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-top: 16px;
+  line-height: 1;
+}
