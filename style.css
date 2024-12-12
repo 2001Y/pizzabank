@@ -119,6 +119,7 @@ tab-system iframe {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   position: relative;
+  background: #f5f5f5;
 }
 
 tab-system iframe::before {
@@ -126,21 +127,42 @@ tab-system iframe::before {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 24px;
-  height: 24px;
-  margin: -12px 0 0 -12px;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="%23666"><path d="M12 4V2A10 10 0 0 0 2 12h2a8 8 0 0 1 8-8Z"/></svg>')
-    center/contain no-repeat;
-  animation: spin 1s linear infinite;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 3px solid #eee;
+  border-top-color: var(--theme-color);
+  border-radius: 50%;
+  animation: iframe-loading 0.8s linear infinite;
+  z-index: 1;
 }
 
-@keyframes spin {
+@keyframes iframe-loading {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
+}
+
+/* ローディング中のプレースホルダーテキスト */
+tab-system iframe::after {
+  content: "Loading...";
+  position: absolute;
+  top: calc(50% + 30px);
+  left: 50%;
+  transform: translateX(-50%);
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* iframeがロードされたら、ローディング表示を非表示に */
+tab-system input[type="radio"]:checked + iframe::before,
+tab-system input[type="radio"]:checked + iframe::after {
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
 tab-system .html-content {
@@ -153,6 +175,10 @@ tab-system .tabs {
   background: var(--theme-color);
   height: 56px;
   z-index: 1;
+}
+
+tab-system[data-phase="final"] .tabs {
+  justify-content: center;
 }
 
 tab-system label {

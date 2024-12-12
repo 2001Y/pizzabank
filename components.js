@@ -12,7 +12,9 @@ class TabSystem extends HTMLElement {
   }
 
   setupPhaseTransition() {
-    const finalPhaseDate = new Date(this.config.phases.final.startTime);
+    const finalPhaseDate = new Date(
+      this.config.phases.final.startTime.replace(" ", "T") + "+09:00"
+    );
     const now = new Date();
 
     if (now >= finalPhaseDate) {
@@ -39,9 +41,15 @@ class TabSystem extends HTMLElement {
         <input type="radio" name="tab" id="${tab.id}" ${
             index === 0 ? "checked" : ""
           } />
-        <iframe class="${tab.id}-frame" src="${
-            tab.content.template || tab.content.url
-          }" frameborder="0"></iframe>
+        <iframe class="${tab.id}-frame" 
+          src="${tab.content.template || tab.content.url}" 
+          allow="accelerometer; autoplay; camera; clipboard-write; encrypted-media; fullscreen; geolocation; gyroscope; magnetometer; microphone; midi; payment; picture-in-picture; screen-wake-lock; usb; web-share; xr-spatial-tracking" 
+          allowfullscreen="true"
+          loading="eager"
+          importance="high"
+          referrerpolicy="no-referrer"
+          sandbox="allow-downloads allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation allow-top-navigation-by-user-activation"
+          frameborder="0"></iframe>
       `
         )
         .join("")}

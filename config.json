@@ -7,7 +7,7 @@
   },
   "phases": {
     "initial": {
-      "startTime": "2024-01-01T00:00:00Z",
+      "startTime": "2024-01-01 09:00:00",
       "tabs": [
         {
           "id": "comments",
@@ -39,7 +39,7 @@
       ]
     },
     "final": {
-      "startTime": "2024-12-13T23:59:59Z",
+      "startTime": "2024-12-13 19:30:00",
       "tabs": [
         {
           "id": "survey",
