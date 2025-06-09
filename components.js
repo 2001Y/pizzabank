@@ -12,6 +12,19 @@ class TabSystem extends HTMLElement {
   }
 
   setupPhaseTransition() {
+    // URLクエリパラメータをチェック
+    const urlParams = new URLSearchParams(window.location.search);
+    const forcePhase = urlParams.get("phase");
+
+    // 有効なphaseが指定されている場合は、それを使用
+    if (forcePhase && (forcePhase === "initial" || forcePhase === "final")) {
+      this.currentPhase = forcePhase;
+      this.dataset.phase = this.currentPhase;
+      // クエリパラメータがある場合は自動遷移は設定しない
+      return;
+    }
+
+    // クエリパラメータがない場合は、従来の時刻ベースの制御
     const finalPhaseDate = new Date(
       this.config.phases.final.startTime.replace(" ", "T") + "+09:00"
     );
