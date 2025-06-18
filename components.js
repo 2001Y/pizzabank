@@ -14,29 +14,37 @@ class TabSystem extends HTMLElement {
   setupPhaseTransition() {
     // URLクエリパラメータをチェック
     const urlParams = new URLSearchParams(window.location.search);
-    const forcePhase = urlParams.get("phase");
+    let forcePhase = urlParams.get("phase");
 
-    // 有効なphaseが指定されている場合は、それを使用
-    if (forcePhase && (forcePhase === "initial" || forcePhase === "final")) {
+    // phaseパラメータがない場合、デフォルトで?phase=autoを付与
+    if (!forcePhase) {
+      urlParams.set("phase", "auto");
+      const newUrl = window.location.pathname + "?" + urlParams.toString();
+      window.history.replaceState({}, "", newUrl);
+      forcePhase = "auto";
+    }
+
+    // 明示的なphase指定（1または2）の場合
+    if (forcePhase === "1" || forcePhase === "2") {
       this.currentPhase = forcePhase;
       this.dataset.phase = this.currentPhase;
-      // クエリパラメータがある場合は自動遷移は設定しない
+      // 明示的な指定がある場合は自動遷移は設定しない
       return;
     }
 
-    // クエリパラメータがない場合は、従来の時刻ベースの制御
+    // phase=autoまたはその他の値の場合は、時刻ベースの制御
     const finalPhaseDate = new Date(
-      this.config.phases.final.startTime.replace(" ", "T") + "+09:00"
+      this.config.phases["2"].startTime.replace(" ", "T") + "+09:00"
     );
     const now = new Date();
 
     if (now >= finalPhaseDate) {
-      this.currentPhase = "final";
+      this.currentPhase = "2";
     } else {
-      this.currentPhase = "initial";
+      this.currentPhase = "1";
       const timeUntilTransition = finalPhaseDate - now;
       setTimeout(() => {
-        this.currentPhase = "final";
+        this.currentPhase = "2";
         this.render();
       }, timeUntilTransition);
     }

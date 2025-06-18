@@ -3,7 +3,7 @@
 }
 
 /* フェーズに応じたテーマカラー */
-tab-system[data-phase="final"] {
+tab-system[data-phase="2"] {
   --theme-color: #0068de;
 }
 
@@ -23,17 +23,12 @@ tab-system[data-phase="final"] {
   background: #fff;
 }
 
-tab-system[data-phase="initial"] .tabs {
+tab-system .tabs {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-tab-system[data-phase="initial"] label {
-  min-width: 40vw;
-  max-width: 200px;
-}
-
-tab-system[data-phase="final"] label {
+tab-system label {
   flex: 1 1 auto;
   max-width: 45%;
 }
@@ -54,11 +49,11 @@ tab-system[data-phase="final"] label {
   --theme-color-rgb: 0, 104, 222;
 }
 
-tab-system[data-phase="initial"] {
+tab-system[data-phase="1"] {
   --theme-color-rgb: 219, 68, 55;
 }
 
-tab-system[data-phase="final"] {
+tab-system[data-phase="2"] {
   --theme-color-rgb: 0, 104, 222;
 }
 
@@ -171,14 +166,10 @@ tab-system .html-content {
 
 tab-system .tabs {
   display: flex;
-  /* justify-content: center; */
+  justify-content: center;
   background: var(--theme-color);
   height: 56px;
   z-index: 1;
-}
-
-tab-system[data-phase="final"] .tabs {
-  justify-content: center;
 }
 
 tab-system label {

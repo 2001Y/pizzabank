@@ -6,8 +6,8 @@
     "survey": "M14,2H6C4.9,2,4,2.9,4,4v16c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V8L14,2z M16,18H8v-2h8V18z M16,14H8v-2h8V14z M13,9V3.5 L18.5,9H13z"
   },
   "phases": {
-    "initial": {
-      "startTime": "2024-01-01 09:00:00",
+    "1": {
+      "startTime": "0000-00-00 00:00:00",
       "tabs": [
         {
           "id": "comments",
@@ -15,16 +15,7 @@
           "icon": "comments",
           "content": {
             "type": "iframe",
-            "url": "https://www.commentscreen.com/comments?id=X46TsfEOHoIKifCRM4oY"
-          }
-        },
-        {
-          "id": "questions",
-          "label": "質問・相談・感想",
-          "icon": "questions",
-          "content": {
-            "type": "iframe",
-            "url": "https://docs.google.com/forms/d/e/1FAIpQLScJREFmvhyBTnxrYTgDld8nkHV_4SBqn5IXbbbJEDMTRrr7qw/viewform"
+            "url": "https://www.commentscreen.com/comments?id=AbnfjXElgejLAPHk74rJ"
           }
         },
         {
@@ -38,8 +29,8 @@
         }
       ]
     },
-    "final": {
-      "startTime": "2025-12-13 20:30:00",
+    "2": {
+      "startTime": "2025-06-18 18:30:00",
       "tabs": [
         {
           "id": "survey",
@@ -47,7 +38,7 @@
           "icon": "survey",
           "content": {
             "type": "iframe",
-            "url": "https://forms.office.com/r/kSBte1LGDR"
+            "url": "https://forms.office.com/Pages/ResponsePage.aspx?id=maihxXpU9UC3SfeGl2gXiXipjj327e9Brx6m4UCe1hVUOUtGSVBUVk9BWTE3RFNLQkVTOTdUNlowNC4u"
           }
         },
         {
