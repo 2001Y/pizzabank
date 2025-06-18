@@ -46,15 +46,24 @@
     <tab-system></tab-system>
     <script src="components.js"></script>
     <script>
-      // Check if modal has been shown and acknowledged
-      if (!localStorage.getItem("modalAcknowledged")) {
-        document.getElementById("welcome-modal").style.display = "flex";
-      }
+      // config.jsonからイベントIDを取得してモーダル表示を管理
+      fetch("/config.json")
+        .then((r) => r.json())
+        .then((config) => {
+          const eventId = config.eventId;
+          const storageKey = `modal-${eventId}`;
 
-      function closeModal() {
-        document.getElementById("welcome-modal").style.display = "none";
-        localStorage.setItem("modalAcknowledged", "true");
-      }
+          // このイベントIDでモーダルを表示したことがない場合のみ表示
+          if (!localStorage.getItem(storageKey)) {
+            document.getElementById("welcome-modal").style.display = "flex";
+
+            // closeModal関数を定義（クロージャでeventIdを保持）
+            window.closeModal = function () {
+              document.getElementById("welcome-modal").style.display = "none";
+              localStorage.setItem(storageKey, "acknowledged");
+            };
+          }
+        });
     </script>
   </body>
 </html>
